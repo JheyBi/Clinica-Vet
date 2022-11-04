@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Cadastro</title>
+    </h:head>
+    <h:body > 
+        <h:form>
+            <h:panelGrid columns="2">
+            
+            <h:outputLabel value="Nome: " />
+            <p:inputText id="nome" value="#{cadastroControle.usuario.nome}"/>
+            <h:outputLabel value="Endereco: " />
+            <p:inputText id="endereco" value="#{cadastroControle.usuario.endereco}"/>
+            <h:outputLabel value="Telefone: " />
+            <p:inputText id="telefone" value="#{cadastroControle.usuario.telefone}"/>
+            <h:outputLabel value="Data de Nascimento: " />
+            <p:calendar id="dataNascimento" pattern="dd/MM/yyyy" value="#{cadastroControle.usuario.dataNascimento}" required="True" requiredMessage="Data obrigatória" showOn="button" locale="pt"/>
+            <h:outputLabel value="Login: " />
+            <p:inputText id="login" value="#{cadastroControle.usuario.login}"/> 
+            <h:outputLabel value="Senha: " />
+            <p:password value="#{cadastroControle.usuario.senha}"/>
+            <p/>  
+            <!-- p:commandButton value="Entrar" styleClass="botao" action="menu" / -->
+            
+            <p:commandButton value="salvar"  
+                             action="#{cadastroControle.salvar()}"
+                             update="@form" />
+            </h:panelGrid>
+            <p:messages showIcon="false" closable="true" />
+        </h:form>     
+    </h:body>
+    
+</html>

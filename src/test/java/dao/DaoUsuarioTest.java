@@ -32,12 +32,12 @@ public class DaoUsuarioTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testAutenticar() {
-        Usuario u = new Usuario();
-        u.setLogin("astolfo");
-        u.setSenha("1234");
-        System.out.println(new DaoUsuario().autenticar(u));
-    }
+//    @Test
+//    public void testAutenticar() {
+//        Usuario u = new Usuario();
+//        u.setLogin("astolfo");
+//        u.setSenha("1234");
+//        System.out.println(new DaoUsuario().autenticar(u));
+//    }
     
 }
