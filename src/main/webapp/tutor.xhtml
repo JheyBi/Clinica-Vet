@@ -13,30 +13,25 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Nome:  " />
                     <p:inputText id="nome" 
-                                 value="#{cadastroControle.usuario.nome}"/>
+                                 value="#{tutorControle.tutor.nome}"/>
                     <h:outputLabel value="Endereço:  " />
                     <p:inputText id="endereco" 
-                                 value="#{cadastroControle.usuario.endereco}"/>
+                                 value="#{tutorControle.tutor.endereco}"/>
                     <h:outputLabel value="Telefone:  " />
                     <p:inputText id="telefone" 
-                                 value="#{cadastroControle.usuario.telefone}"/>
+                                 value="#{tutorControle.tutor.telefone}"/>
                     <h:outputLabel value="Data nascimento:  " />
                     <p:calendar id="data" pattern="dd/MM/yyyy"
-                                value="#{cadastroControle.usuario.dataNascimento}" 
+                                value="#{tutorControle.tutor.dataNascimento}" 
                                 required="true" requiredMessage="Data obrigatória"
                                 showOn="button"
                                 locale="pt"/>
-                    <h:outputLabel value="Login:  " />
-                    <p:inputText id="login" 
-                                 value="#{cadastroControle.usuario.login}">
-                        <p:ajax event="change" listener="#{cadastroControle.converter()}"
-                                update="login" />
-                    </p:inputText>
-                    <h:outputLabel value="Senha" />
-                    <p:password value="#{cadastroControle.usuario.senha}"/>
+                    <h:outputLabel value="CPF:  " />
+                    <p:inputText id="cpf" 
+                                 value="#{tutorControle.tutor.cpf}"/>
                     <p:commandButton value="cancelar" immediate="true" action="menu"/>
                     <p:commandButton value="salvar" 
-                                     action="#{cadastroControle.salvar()}"
+                                     action="#{tutorControle.salvar()}"
                                      update="formNovo, :formTabela" />
                 </h:panelGrid>
                 <p:messages showIcon="false" closable="true"/>
@@ -44,8 +39,8 @@
         </p:fieldset>
         <p/>
         <h:form id="formTabela">  
-            <p:dataTable id="tabelaUsuarios"  
-                         value="#{cadastroControle.lista}" 
+            <p:dataTable id="tabelaTutores"  
+                         value="#{tutorControle.lista}" 
                          var="item"
                          lazy="true"
                          emptyMessage="Nenhum usuário cadastrado"
@@ -57,8 +52,8 @@
                 <p:column headerText="Nome">
                     <h:outputText value="#{item.nome}"/>
                 </p:column>
-                <p:column headerText="Login">
-                    <h:outputText value="#{item.login}"/>
+                <p:column headerText="CPF">
+                    <h:outputText value="#{item.cpf}"/>
                 </p:column>
                 <p:column headerText="Telefone">
                     <h:outputText value="#{item.telefone}"/>

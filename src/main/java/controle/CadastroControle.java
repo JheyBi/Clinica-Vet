@@ -1,35 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controle;
 
 import dao.Dao;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Usuario;
+import util.JsfUtil;
 
-/**
- *
- * @author temporario
- */
+
 
 @Named
 @ViewScoped
 public class CadastroControle implements Serializable {
     private Usuario usuario;
-    private Dao<Usuario> dao;
+    private Dao<Usuario> dao; 
+    private List<Usuario> lista; 
     
     @PostConstruct
-    public void iniciar(){
+    public void iniciar(){ 
         usuario = new Usuario();
-        dao = new Dao(Usuario.class);
+        dao = new Dao(Usuario.class); 
+        setLista(dao.listarTodos()); 
     }
     
-    public void salvar(){
+    public String salvar(){
         dao.inserir(usuario);
+        usuario = new Usuario(); // limpa os campos 
+        JsfUtil.mostrarSucesso("Usuário cadastrado");
+        lista = dao.listarTodos(); // atualiza tabela 
+        return null; 
+    }
+    
+    public void converter(){
+        usuario.setLogin(usuario.getLogin().toLowerCase());
     }
 
     public Usuario getUsuario() {
@@ -40,12 +45,12 @@ public class CadastroControle implements Serializable {
         this.usuario = usuario;
     }
 
-    public Dao<Usuario> getDao() {
-        return dao;
+    public List<Usuario> getLista() {
+        return lista;
     }
 
-    public void setDao(Dao<Usuario> dao) {
-        this.dao = dao;
+    public void setLista(List<Usuario> lista) {
+        this.lista = lista;
     }
     
     
