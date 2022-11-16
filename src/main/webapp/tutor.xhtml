@@ -59,12 +59,65 @@
                     <h:outputText value="#{item.telefone}"/>
                 </p:column>
                 <p:column headerText="Alterar"> 
-                    <p:commandLink value="alterar" />
+                    <p:commandLink value="alterar"
+                                   action="#{tutorControle.alterar(item)}"
+                                   update="formTabela,:formAlteracao"/>
                 </p:column>
                 <p:column headerText="Excluir"> 
-                    <p:commandLink value="excluir" />
+                    <p:commandButton value="excluir" 
+                                     action="#{tutorControle.excluir(item.codigo)}"
+                                     update="formTabela" />
                 </p:column>
             </p:dataTable>
+            
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+                    <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes"  />
+                    <p:commandButton value="não" type="button" styleClass="ui-confirmdialog-no"  />
+                </p:outputPanel>
+            </p:confirmDialog>
+            
+        </h:form>
+
+        
+        <h:form id="formAlteracao">
+            <p:dialog widgetVar="popupAlteracao" width="50%" modal="true"
+                      header="Alteração"
+                      visible="#{tutorControle.mostraPopupAlteracao}">
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Código:  " />
+                    <p:inputText id="codigo2"  disabled="true"
+                                 value="#{tutorControle.tutor.codigo}"/>
+                    <h:outputLabel value="Nome:  " />
+                    <p:inputText id="nome2" 
+                                 value="#{tutorControle.tutor.nome}"/>
+                    <h:outputLabel value="Endereço:  " />
+                    <p:inputText id="endereco2" 
+                                 value="#{tutorControle.tutor.endereco}"/>
+                    <h:outputLabel value="Telefone:  " />
+                    <p:inputText id="telefone2" 
+                                 value="#{tutorControle.tutor.telefone}"/>
+                    <h:outputLabel value="Data nascimento:  " />
+                    <p:calendar id="data2" pattern="dd/MM/yyyy"
+                                value="#{tutorControle.tutor.dataNascimento}" 
+                                required="true" requiredMessage="Data obrigatória"
+                                showOn="button"
+                                locale="pt"/>
+                    <h:outputLabel value="Login:  " />
+                    <p:inputText id="cpf" 
+                                 value="#{tutorControle.tutor.cpf}">
+                    </p:inputText>
+                    <p:commandButton value="cancelar" immediate="true" 
+                                     action="#{tutorControle.fecharPopupAlteracao()}"
+                                     update="formAlteracao"/>
+                    <p:commandButton value="salvar" 
+                                     action="#{tutorControle.salvarAlteracao()}"
+                                     update="formAlteracao, :formTabela" />
+                </h:panelGrid>
+                <p:messages showIcon="false" closable="true"/>
+
+            </p:dialog>
         </h:form>
 
     </h:body>

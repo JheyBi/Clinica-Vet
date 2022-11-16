@@ -24,6 +24,7 @@ public class TutorControle implements Serializable {
     private Tutor tutor1;
     private Dao<Tutor> dao;
     private List<Tutor> lista;
+    private Boolean mostraPopupAlteracao;
     
     @PostConstruct
     public void iniciar(){
@@ -39,9 +40,35 @@ public class TutorControle implements Serializable {
         lista = dao.listarTodos(); // atualiza tabela 
         return null; 
     }
+
+    public Boolean getMostraPopupAlteracao() {
+        return mostraPopupAlteracao;
+    }
+
+    public void setMostraPopupAlteracao(Boolean mostraPopupAlteracao) {
+        this.mostraPopupAlteracao = mostraPopupAlteracao;
+    }
     
-    public void atualizar(){
-        
+    public void alterar(Tutor selecionado) {
+        this.tutor1 = selecionado; 
+        mostraPopupAlteracao = true;
+    }
+    
+    public void fecharPopupAlteracao(){
+        mostraPopupAlteracao = false; 
+    }
+    
+    public String salvarAlteracao(){
+        dao.alterar(tutor1);
+        tutor1 = new Tutor(); // limpa os campos 
+        JsfUtil.mostrarSucesso("Usuário alterado");
+        lista = dao.listarTodos(); // atualiza tabela 
+        return null; 
+    }
+    
+    public void excluir(int codigo){
+        dao.excluir(codigo);
+        lista = dao.listarTodos();
     }
 
     public Tutor getTutor() {
